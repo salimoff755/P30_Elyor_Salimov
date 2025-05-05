@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncAttrs
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-from envirement.utils import Env
+from envirements.utils import Env
 
 env = Env()
 
@@ -20,7 +20,7 @@ class AsyncDatabaseSession:
 
     def init(self):
         self._engine = create_async_engine(
-            env.db.DB_URL,  # To‘g‘ri ishlatilgan
+            env.db.DB_URL,
             future=True,
             echo=False,
             isolation_level="AUTOCOMMIT"

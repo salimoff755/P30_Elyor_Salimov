@@ -5,16 +5,16 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: 1
-      POSTGRES_DB: tg_bot_p30
+      POSTGRES_DB: exam_p30_module5
     ports:
-      - "5434:5432"
+      - "5435:5432"
     volumes:
       - tg_bot:/var/lib/postgres/data
 
   bot:
     build: .
-    image: tgbotp30:latest
-    container_name: botp30_con
+    image: exam_p30_module5:latest
+    container_name: exam_p30_module5_con
     restart: always
     command: python3 main.py
     environment:
@@ -24,8 +24,8 @@ services:
 
   web:
     build: .
-    image: botp30_web:latest
-    container_name: botp30_web_con
+    image: exam_p30_module5_web:latest
+    container_name: exam_p30_module5_web_con
     restart: always
     command: uvicorn web.app:app --host 0.0.0.0 --port 8000
     depends_on:

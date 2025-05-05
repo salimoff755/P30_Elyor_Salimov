@@ -2,7 +2,9 @@ from sqlalchemy import DateTime, text
 from sqlalchemy import delete as sqlalchemy_delete
 from sqlalchemy import update as sqlalchemy_update
 from sqlalchemy.future import select
-from sqlalchemy.orm import declared_attr, lazyload, Mapped, mapped_column
+from sqlalchemy.orm import lazyload, Mapped, mapped_column, declared_attr
+
+
 
 from db import db, Base
 
