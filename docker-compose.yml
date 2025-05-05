@@ -1,0 +1,37 @@
+services:
+  pg_service:
+    image: postgres:alpine
+    container_name: postgres_con
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: tg_bot_p30
+    ports:
+      - "5434:5432"
+    volumes:
+      - tg_bot:/var/lib/postgres/data
+
+  bot:
+    build: .
+    image: tgbotp30:latest
+    container_name: botp30_con
+    restart: always
+    command: python3 main.py
+    environment:
+      POSTGRES_PASSWORD: 1
+    depends_on:
+      - pg_service
+
+  web:
+    build: .
+    image: botp30_web:latest
+    container_name: botp30_web_con
+    restart: always
+    command: uvicorn web.app:app --host 0.0.0.0 --port 8000
+    depends_on:
+      - pg_service
+    ports:
+      - "8000:8000"
+
+volumes:
+  tg_bot:
